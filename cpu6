@@ -1,0 +1,10 @@
+version = 7
+cpus=104
+          <idle>-0     [006] 168641.394417988: sched_switch:         swapper/6:0 [120] R ==> migration/6:43 [0]
+     migration/6-43    [006] 168641.394426426: sched_switch:         migration/6:43 [0] S ==> swapper/6:0 [120]
+          <idle>-0     [006] 168645.394525590: sched_switch:         swapper/6:0 [120] R ==> migration/6:43 [0]
+     migration/6-43    [006] 168645.394533035: sched_switch:         migration/6:43 [0] S ==> swapper/6:0 [120]
+          <idle>-0     [006] 168645.639397772: sched_switch:         swapper/6:0 [120] R ==> dockerd:12771 [120]
+         dockerd-12771 [006] 168645.639460767: sched_switch:         dockerd:12771 [120] S ==> swapper/6:0 [120]
+          <idle>-0     [006] 168645.639580135: sched_switch:         swapper/6:0 [120] R ==> dockerd:12771 [120]
+         dockerd-12771 [006] 168645.639660335: sched_switch:         dockerd:12771 [120] S ==> swapper/6:0 [120]
