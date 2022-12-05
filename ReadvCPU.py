@@ -4,9 +4,22 @@ class Node:
         self.start = start
         self.end = end
         self.interval = end - start
+
+        self.No = 0
         self.id = vCPUId
-        self.migratePoint = end - 0.001
-        self.jumpNode = None
+        self.migratePoint = end - 0.0006
+
+        self.currTask = 0
+
+        self.jumpNodes = []
+        self.jumpDuration = 0
+
+    def getJumpNode(self):
+        if len(self.jumpNodes) == 0:
+            return None
+        self.jumpNodes.sort(key=lambda x: x[0].migratePoint, reverse=True)
+        self.jumpNodes.sort(key=lambda x: x[0].currTask)
+        return self.jumpNodes[0]
 
 class Parser:
     def __init__(self, pCPU_min, pCPU_max,addr):
@@ -18,6 +31,7 @@ class Parser:
         self.server_vm = {}
         self.background_vm = {}
         self.addr = addr
+        self.possibleJumpCount = 0
 
     def toNano(self, t):
         return round(t * 1000000000)
@@ -62,6 +76,12 @@ class Parser:
             return self.background_vm
         return self.others
 
+    def addNo(self):
+        for cpu in self.server_vm.values():
+            No = 0
+            for n in cpu:
+                n.No = No
+                No += 1
     def read_vCPUs(self):
         pcpu_numbers = self.pCPU_max - self.pCPU_min + 1
         # cpu 1-4
@@ -109,3 +129,4 @@ class Parser:
                     Last_time_stamp = now_time_stamp
 
             self.tests_length.append((now_time_stamp - start_time))
+        self.addNo()
