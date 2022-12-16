@@ -179,7 +179,7 @@ pwd = str(p.readline().rstrip())
 p.close()
 # generate cpus
 for i in range(1,1+vcpu_len):
-    os.system("sudo trace-cmd report -t --cpu"+ str(i) +" > " + pwd + "cpu"+ str(i))
+    os.system("sudo trace-cmd report -t --cpu "+ str(i) +" > " + pwd + "cpu"+ str(i))
 # get vcpus
 vcpulist = []
 f = os.popen("cat /proc/vcpu_list_show")
