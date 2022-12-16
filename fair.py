@@ -37,7 +37,7 @@ class Parser:
         self.b1 = {}
         self.b2 = {}
         self.b3 = {}
-        self.addr = addr+"/"
+        self.addr = addr + "/"
         self.possibleJumpCount = 0
         self.v1 = v[0]
         self.v2 = v[1]
@@ -86,7 +86,7 @@ class Parser:
         for k in keys:
             intervals = [x.interval for x in lst[k]]
             tmp = tmp + intervals
-            cpus.append(str(round(sum(intervals) / sum(self.tests_length) * 4, 4)) + "%")
+            cpus.append(str(round(sum(intervals) / sum(self.tests_length) * 400, 4)) + "%")
             s += sum(intervals)
         cpus.append(str(round(s / sum(self.tests_length) * 100, 4)) + "%")
         return cpus
@@ -184,7 +184,7 @@ for line in f:
     vcpulist.append(int(line.split()[3]))
 f.close()
 vcpulist.sort()
-temp = vcpulist + [0 for x in range(0, 100)]
+temp = vcpulist + [-1 for x in range(0, 100)]
 vms = [temp[0], temp[0 + vcpu_len], temp[0 + 2 * vcpu_len], temp[0 + 2 * vcpu_len]]
 print(vms)
 # analyse trace
@@ -204,9 +204,9 @@ if len(parser.b3) != 0:
     result.append(parser.analyseCPUs(parser.b3))
     print(parser.analyseCPUs(parser.b3))
 import pandas as pd
-columns=["CPU "+ str(x) for x in range(vcpu_len)]
-columns.append("sum")
-df = pd.DataFrame(result,columns)
-print(df)
-print(result)
 
+columns = ["CPU " + str(x) for x in range(vcpu_len)]
+columns.append("sum")
+print(result)
+df = pd.DataFrame(result, columns)
+print(df)
