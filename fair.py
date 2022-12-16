@@ -98,17 +98,17 @@ class Parser:
         b2 = self.v3
         b3 = self.v4
         interval = self.pCPU_max - self.pCPU_min + 1
-        if (io!=-1 and self.is_inlist(range(io, io + interval), name)):
+        if (io != -1 and self.is_inlist(range(io, io + interval), name)):
             return self.server_vm
         #     put pid ... in clone1 list
         # clone1
-        if (b1 !=-1 and self.is_inlist(range(b1, b1 + interval), name)):
+        if (b1 != -1 and self.is_inlist(range(b1, b1 + interval), name)):
             return self.b1
         # clone2
-        if (b2 !=-1 and self.is_inlist(range(b2, b2 + interval), name)):
+        if (b2 != -1 and self.is_inlist(range(b2, b2 + interval), name)):
             return self.b2
         # clone
-        if (b3 !=-1 and self.is_inlist(range(b3, b3 + interval), name)):
+        if (b3 != -1 and self.is_inlist(range(b3, b3 + interval), name)):
             return self.b3
         return self.others
 
@@ -177,6 +177,9 @@ vcpu_len = vcpu_max - vcpu_min + 1
 p = os.popen("pwd")
 pwd = str(p.readline().rstrip())
 p.close()
+# generate cpus
+for i in range(1,1+vcpu_len):
+    os.system("sudo trace-cmd report -t --cpu"+ str(i) +" > " + pwd + "cpu"+ str(i))
 # get vcpus
 vcpulist = []
 f = os.popen("cat /proc/vcpu_list_show")
@@ -202,5 +205,5 @@ import pandas as pd
 
 cols = ["CPU " + str(x) for x in range(vcpu_len)]
 cols.append("sum")
-df = pd.DataFrame(result, columns = cols)
+df = pd.DataFrame(result, columns=cols)
 print(df)
