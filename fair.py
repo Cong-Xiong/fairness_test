@@ -192,16 +192,20 @@ parser = Parser(vcpu_min, vcpu_max, pwd, vms)
 parser.read_vCPUs()
 if len(parser.server_vm) != 0:
     result.append(parser.analyseCPUs(parser.server_vm))
+    print(parser.analyseCPUs(parser.server_vm))
 if len(parser.b1) != 0:
     result.append(parser.analyseCPUs(parser.b1))
+    print(parser.analyseCPUs(parser.b1))
 if len(parser.b2) != 0:
     result.append(parser.analyseCPUs(parser.b2))
+    print(parser.analyseCPUs(parser.b2))
 if len(parser.b3) != 0:
     result.append(parser.analyseCPUs(parser.b3))
+    print(parser.analyseCPUs(parser.b3))
 import pandas as pd
 columns=["CPU "+ str(x) for x in range(vcpu_len)]
 columns.append("sum")
 df = pd.DataFrame(result,columns)
 print(df)
-
+print(result)
 
