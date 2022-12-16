@@ -37,7 +37,7 @@ class Parser:
         self.b1 = {}
         self.b2 = {}
         self.b3 = {}
-        self.addr = addr
+        self.addr = addr+"/"
         self.possibleJumpCount = 0
         self.v1 = v[0]
         self.v2 = v[1]
@@ -174,7 +174,9 @@ args = sys.argv
 vcpu_min = int(args[1])
 vcpu_max = int(args[2])
 vcpu_len = vcpu_max - vcpu_min + 1
-pwd = os.popen("pwd")
+p = os.popen("pwd")
+pwd = str(p.readline().rstrip())
+p.close()
 # get vcpus
 vcpulist = []
 f = os.popen("cat /proc/vcpu_list_show")
