@@ -98,17 +98,17 @@ class Parser:
         b2 = self.v3
         b3 = self.v4
         interval = self.pCPU_max - self.pCPU_min + 1
-        if (self.is_inlist(range(io, io + interval), name)):
+        if (io!=-1 and self.is_inlist(range(io, io + interval), name)):
             return self.server_vm
         #     put pid ... in clone1 list
         # clone1
-        if (self.is_inlist(range(b1, b1 + interval), name)):
+        if (b1 !=-1 and self.is_inlist(range(b1, b1 + interval), name)):
             return self.b1
         # clone2
-        if (self.is_inlist(range(b2, b2 + interval), name)):
+        if (b2 !=-1 and self.is_inlist(range(b2, b2 + interval), name)):
             return self.b2
         # clone
-        if (self.is_inlist(range(b3, b3 + interval), name)):
+        if (b3 !=-1 and self.is_inlist(range(b3, b3 + interval), name)):
             return self.b3
         return self.others
 
