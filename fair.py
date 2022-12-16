@@ -186,6 +186,7 @@ f.close()
 vcpulist.sort()
 temp = vcpulist + [0 for x in range(0, 100)]
 vms = [temp[0], temp[0 + vcpu_len], temp[0 + 2 * vcpu_len], temp[0 + 2 * vcpu_len]]
+print(vms)
 # analyse trace
 result = []
 parser = Parser(vcpu_min, vcpu_max, pwd, vms)
