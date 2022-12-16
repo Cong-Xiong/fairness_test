@@ -4,6 +4,7 @@ class Simulate:
         self.runtimes = []
         self.paths = {}
 
+
     def run(self, parser):
         for t in range(0, self.threadNo):
             self.findOneThreadPath(parser, list(parser.server_vm.values())[t][0])
@@ -31,8 +32,8 @@ class Simulate:
         path = self.paths.get(node.id)
         time = node.migratePoint - node.start
         for p in path:
-            # time += p[1]/p[0].currTask
-            time += p[1]
+            time += p[1]/p[0].currTask
+            # time += p[1]
         return time
 
     def clear(self, parser):

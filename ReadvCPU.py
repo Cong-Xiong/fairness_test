@@ -29,7 +29,9 @@ class Parser:
         self.others = {}
         self.tests_length = []
         self.server_vm = {}
-        self.background_vm = {}
+        self.b1 = {}
+        self.b2 = {}
+        self.b3 = {}
         self.addr = addr
         self.possibleJumpCount = 0
 
@@ -62,18 +64,56 @@ class Parser:
         print("------------------------------")
         print(name + " average wake up time:\t" + str(self.toNano(stat.mean(tmp))) + "ns")
         print(name + " stdev wake up time:\t" + str(self.toNano(stat.stdev(tmp))) + "ns")
-        print(name + " total runtime:\t" + str(s) + "s")
-        print(name + " total runtime%:\t" + str(round(s / sum(self.tests_length) * 100, 4)) + "%")
+        print(name + " runtime:\t" + str(s) + "s")
+        print(name + " runtime%:\t" + str(round(s / sum(self.tests_length) * 100, 4)) + "%")
         print("------------------------------")
         print("runtime:\t" + str(sum(self.tests_length)))
 
+    def analyse2(self, lst):
+        keys = lst.keys()
+        # print("------------------------------")
+        tmp = []
+        s = 0
+        for k in keys:
+            intervals = [x.interval for x in lst[k]]
+            tmp = tmp + intervals
+            # print("------------------------------")
+            # print(k + ":")
+            # print("average wake up time:\t" + str(self.toNano(stat.mean(intervals))) + "ns")
+            # print("stdev wake up time:\t" + str(self.toNano(stat.stdev(intervals))) + "ns")
+            # print("max wake up time:\t" + str(self.toNano(max(intervals))) + "ns")
+            # print("min wake up time:\t" + str(self.toNano(min(intervals))) + "ns")
+            # print("total runtime:\t" + str(sum(intervals)) + "s")
+            print( str(sum(intervals)/sum(self.tests_length) )+"\t",end="")
+            # s += sum(intervals)
+        print("")
+        # print("------------------------------")
+        # print(name + " average wake up time:\t" + str(self.toNano(stat.mean(tmp))) + "ns")
+        # print(name + " stdev wake up time:\t" + str(self.toNano(stat.stdev(tmp))) + "ns")
+        # print(name + " runtime:\t" + str(s) + "s")
+        # print(name + " runtime%:\t" + str(round(s / sum(self.tests_length) * 100, 4)) + "%")
+        # print("------------------------------")
+        # print("runtime:\t" + str(sum(self.tests_length)))
+
     def group(self, name):
         #     put pid ... in nginx list
-        if (self.is_inlist(range(3291,3303), name)):
+        io = 5134
+        b1 = 5278
+        b2 = 5348
+        b3 = 6371
+        interval = 13
+        if (self.is_inlist(range(io,io+interval), name)):
             return self.server_vm
         #     put pid ... in clone1 list
-        if (self.is_inlist([range(3436,3448)], name)):
-            return self.background_vm
+        # clone1
+        if (self.is_inlist(range(b1,b1+interval), name)):
+            return self.b1
+        # clone2
+        if (self.is_inlist(range(b2,b2+interval), name)):
+            return self.b2
+        # clone
+        if (self.is_inlist(range(b3,b3+interval), name)):
+            return self.b3
         return self.others
 
     def addNo(self):
