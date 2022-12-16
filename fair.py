@@ -203,3 +203,4 @@ import pandas as pd
 cols = ["CPU " + str(x) for x in range(vcpu_len)]
 cols.append("sum")
 df = pd.DataFrame(result, columns = cols)
+print(df)
