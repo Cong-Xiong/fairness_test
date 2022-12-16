@@ -86,7 +86,7 @@ class Parser:
         for k in keys:
             intervals = [x.interval for x in lst[k]]
             tmp = tmp + intervals
-            cpus.append(sum(intervals) / sum(self.tests_length) * 4)
+            cpus.append(str(round(sum(intervals) / sum(self.tests_length) * 4, 4)) + "%")
             s += sum(intervals)
         cpus.append(str(round(s / sum(self.tests_length) * 100, 4)) + "%")
         return cpus
